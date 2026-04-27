@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Commande confirmee | SimpliCulinary{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm border-0">
+    <div class="card-body p-4">
+        <h1 class="h2 text-success mb-3">Commande confirmee</h1>
+        <p class="mb-1">Numero : <strong>#{{ order.pk }}</strong></p>
+        <p class="mb-1">Client : <strong>{{ order.customer_name }}</strong></p>
+        <p class="mb-1">Ville : <strong>{{ order.city }}</strong></p>
+        <p class="mb-3">Total : <strong>{{ order.total }} DH</strong></p>
+        <h2 class="h5">Produits</h2>
+        <ul class="mb-4">
+            {% for item in order.items.all %}
+                <li>{{ item.product.name }} x {{ item.quantity }} - {{ item.line_total }} DH</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'product_list' %}" class="btn btn-success">Continuer les achats</a>
+    </div>
+</div>
+{% endblock %}

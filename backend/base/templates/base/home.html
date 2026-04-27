@@ -1,0 +1,66 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Accueil | SimpliCulinary{% endblock %}
+
+{% block content %}
+<section class="hero-card p-4 p-md-5 mb-5">
+    <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+            <span class="product-badge mb-3">Cuisine moderne</span>
+            <h1 class="display-5 fw-bold mb-3">Bienvenue dans SimpliCulinary</h1>
+            <p class="lead text-secondary mb-4">
+                Decouvrez une selection de produits culinaires pratiques, robustes et adaptes a une cuisine du quotidien.
+            </p>
+            <div class="d-flex flex-wrap gap-3">
+                <a href="/products/" class="btn btn-brand btn-lg px-4">Voir les produits</a>
+                <a href="/admin/" class="btn btn-outline-dark btn-lg px-4">Ouvrir l'admin</a>
+            </div>
+            <div class="row g-3 mt-3">
+                <div class="col-sm-4">
+                    <div class="hero-stat">
+                        <div class="fw-bold fs-4">Qualite</div>
+                        <div class="text-secondary">Materiel fiable</div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="hero-stat">
+                        <div class="fw-bold fs-4">Design</div>
+                        <div class="text-secondary">Presentation propre</div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="hero-stat">
+                        <div class="fw-bold fs-4">Django</div>
+                        <div class="text-secondary">Gestion simple</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="surface-card p-4 h-100">
+                <h2 class="h4 section-title mb-3">Pourquoi ce site ?</h2>
+                <div class="row g-3">
+                    <div class="col-12">
+                        <div class="p-3 rounded-4" style="background:#edf7f2;">
+                            <strong>Catalogue clair</strong>
+                            <p class="mb-0 text-secondary">Des fiches produits simples a parcourir.</p>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="p-3 rounded-4" style="background:#fff7de;">
+                            <strong>Interface propre</strong>
+                            <p class="mb-0 text-secondary">Une base visuelle moderne et legere.</p>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="p-3 rounded-4" style="background:#eef3ff;">
+                            <strong>Django admin</strong>
+                            <p class="mb-0 text-secondary">Gestion rapide des categories et produits.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

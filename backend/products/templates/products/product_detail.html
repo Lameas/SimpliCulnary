@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+
+{% block title %}{{ product.name }} | SimpliCulinary{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    <div class="col-lg-5">
+        <div class="card shadow-sm border-0">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+            {% else %}
+                <div class="p-5 text-center text-muted">Aucune image</div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <h1 class="h2">{{ product.name }}</h1>
+        <p class="text-muted mb-2">
+            Categorie :
+            {% if product.category %}{{ product.category.name }}{% else %}Sans categorie{% endif %}
+        </p>
+        <p>{{ product.description }}</p>
+        <div class="d-flex gap-4 mb-4">
+            <strong class="fs-4">{{ product.price }} DH</strong>
+            <span class="align-self-center">Stock : {{ product.stock }}</span>
+        </div>
+        <div class="d-flex gap-2 flex-wrap">
+            <form method="post" action="{% url 'add_to_cart' product.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success">Ajouter au panier</button>
+            </form>
+            <a href="{% url 'product_update' product.pk %}" class="btn btn-outline-secondary">Modifier</a>
+            <a href="{% url 'product_delete' product.pk %}" class="btn btn-outline-danger">Supprimer</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

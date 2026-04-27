@@ -1,0 +1,59 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Produits | SimpliCulinary{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+    <div>
+        <h1 class="h2 mb-1">Produits</h1>
+        <p class="text-muted mb-0">Catalogue avec CRUD et ajout au panier.</p>
+    </div>
+    <div class="d-flex gap-2">
+        <a href="/products/create/" class="btn btn-success">Ajouter un produit</a>
+        <a href="/products/categories/" class="btn btn-outline-dark">Gerer les categories</a>
+    </div>
+</div>
+
+<div class="row g-4">
+    {% for product in products %}
+        <div class="col-md-6 col-xl-4">
+            <div class="card h-100 shadow-sm border-0">
+                {% if not use_demo_data and product.image %}
+                    <img src="{{ product.image.url }}" class="card-img-top" style="height: 220px; object-fit: cover;" alt="{{ product.name }}">
+                {% endif %}
+                <div class="card-body d-flex flex-column">
+                    {% if use_demo_data %}
+                        <span class="badge text-bg-light mb-2">{{ product.Categorie }}</span>
+                        <h5 class="card-title">{{ product.Nom }}</h5>
+                        <p class="text-muted mb-2">Marque : {{ product.Marque }}</p>
+                        <p class="mb-0">Stock : {{ product.Stock }}</p>
+                    {% else %}
+                        <span class="badge text-bg-light mb-2">
+                            {% if product.category %}{{ product.category.name }}{% else %}Sans categorie{% endif %}
+                        </span>
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="text-muted flex-grow-1">{{ product.description|truncatewords:18 }}</p>
+                        <div class="d-flex justify-content-between mb-3">
+                            <strong>{{ product.price }} DH</strong>
+                            <span>Stock : {{ product.stock }}</span>
+                        </div>
+                        <div class="d-flex gap-2 flex-wrap">
+                            <a href="{% url 'product_detail' product.pk %}" class="btn btn-outline-primary btn-sm">Voir</a>
+                            <a href="{% url 'product_update' product.pk %}" class="btn btn-outline-secondary btn-sm">Modifier</a>
+                            <a href="{% url 'product_delete' product.pk %}" class="btn btn-outline-danger btn-sm">Supprimer</a>
+                            <form method="post" action="{% url 'add_to_cart' product.pk %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-success btn-sm">Ajouter au panier</button>
+                            </form>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">Aucun produit disponible.</div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

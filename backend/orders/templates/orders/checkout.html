@@ -1,0 +1,48 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Checkout | SimpliCulinary{% endblock %}
+
+{% block content %}
+<h1 class="h2 mb-4">Checkout</h1>
+
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-4">
+                <h2 class="h5 mb-3">Informations de livraison</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-success">Valider la commande</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h2 class="h5 mb-3">Votre commande</h2>
+                {% for item in items %}
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>{{ item.product.name }} x {{ item.quantity }}</span>
+                        <strong>{{ item.line_total }} DH</strong>
+                    </div>
+                {% endfor %}
+                <hr>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Sous-total</span>
+                    <strong>{{ subtotal }} DH</strong>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Livraison</span>
+                    <strong>{{ shipping_fee }} DH</strong>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span>Total</span>
+                    <strong>{{ total }} DH</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
